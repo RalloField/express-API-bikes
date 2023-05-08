@@ -1,0 +1,33 @@
+{
+  "name": "verou-4-backend-express-intro-rallofield",
+  "version": "1.0.0",
+  "description": "webshop exercise with postman",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "20km": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/becodeorg/verou-4-backend-express-intro-RalloField.git"
+  },
+  "author": "Raoul Vandevelde",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/becodeorg/verou-4-backend-express-intro-RalloField/issues"
+  },
+  "homepage": "https://github.com/becodeorg/verou-4-backend-express-intro-RalloField#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mariadb": "^3.1.1"
+  }
+}
