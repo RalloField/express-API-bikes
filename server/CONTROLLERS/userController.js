@@ -49,7 +49,7 @@ createUser: async (req,res) => {
         connection = await pool.getConnection();
         const result = await connection.execute(`INSERT INTO users (user_name, user_lastname, email, password) VALUES (?,?,?,?)`,[user_name,user_lastname,email,hashedPassword]);
         const userID = result.insertId;
-        res.send({id:Number(userID), user_name,user_lastname,email,password});
+        res.send({id:Number(userID), user_name,user_lastname,email,hashedPassword});
     } catch (err) {
         console.error('Failed to create user', err);
         res.status(500).send('Failed to create user');
@@ -78,7 +78,7 @@ updateUser: async (req,res) =>
             user_name,
             user_lastname,
             email,
-            password,
+            hashedPassword,
         };
         res.send(updatedUser);
     } catch (err) {

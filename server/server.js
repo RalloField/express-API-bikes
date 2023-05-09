@@ -2,8 +2,10 @@
 const express = require('express');
 const mariadb = require('mariadb');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const poem_Server = require('./ROUTES/poem_routes');
 const user_Server = require('./ROUTES/user-routes');
+
 
 // add config for the .env file for the DB
 
@@ -11,6 +13,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+
 
 app.use(poem_Server);
 app.use(user_Server);

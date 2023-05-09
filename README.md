@@ -47,7 +47,8 @@ You can now follow the instructions from the browser.
 
 ## Authentication
 
-To be added.
+Authentication works with users and admins. There is CRUD for the users table. BUT, only the admin can have access to the full READ of the CRUD.
+We are using a bcrypt package in the usersController to hash the password in which later we will also use the unique value of the email to authenticate the user or admin.
 
 ## Error handling
 
