@@ -5,6 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const poem_Server = require('./ROUTES/poem_routes');
 const user_Server = require('./ROUTES/user-routes');
+const pageNotFound = require('./MIDDLEWARES/pageNotFound.middleware');
 
 
 // add config for the .env file for the DB
@@ -18,6 +19,7 @@ app.use(cookieParser());
 
 app.use(poem_Server);
 app.use(user_Server);
+app.use(pageNotFound);
 
 
 

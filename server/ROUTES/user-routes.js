@@ -33,9 +33,4 @@ router
 .route('/session/logout')
 .post(authenticateUser,logoutController.logoutAuthenticator);
 
-
-router.use((req, res, next) => {
-res.status(404).send('404 - Page not found <br> Lo siento esta pagina no existe! ');
-});
-
 module.exports = router;
