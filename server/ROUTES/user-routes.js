@@ -3,7 +3,7 @@ const router = express.Router();
 const usersController = require('../CONTROLLERS/userController');
 const loginController = require('../CONTROLLERS/loginControllers')
 const validateUserFields = require('../MIDDLEWARES/user_formValidation.middleware');
-const notFound = require('../MIDDLEWARES/form_validation.middlewares');
+const notFound = require('../MIDDLEWARES/user_NotFound.middleware');
 const logoutController = require('../CONTROLLERS/logoutController');
 const authenticateUser = require('../MIDDLEWARES/authentication_validation.middleware');
 
@@ -15,7 +15,7 @@ router
 //show, update, create and delete -> add middleware so it only becomes available after logging in.
 router
 .route('/profile/:id')
-.get(usersController.getUser)
+.get(notFound,usersController.getUser)
 .put(authenticateUser,validateUserFields,usersController.updateUser)
 .delete(authenticateUser,usersController.deleteUser);
 

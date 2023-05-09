@@ -2,8 +2,8 @@
 const express = require('express');
 const router = express.Router();
 const controllers = require('../CONTROLLERS/poemControllers');
-const validatePoemFields = require('../MIDDLEWARES/form_validation.middlewares');
-const notFound = require('../MIDDLEWARES/id_exist_validation.middleware');
+const validatePoemFields = require('../MIDDLEWARES/poem_formValidation.middleware');
+const notFound = require('../MIDDLEWARES/poem_NotFound.middleware');
 const authenticateUser = require('../MIDDLEWARES/authentication_validation.middleware');
 
 
