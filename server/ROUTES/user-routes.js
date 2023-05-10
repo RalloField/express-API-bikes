@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const usersController = require('../CONTROLLERS/userController');
+const poemController = require('../CONTROLLERS/poemControllers');
 const loginController = require('../CONTROLLERS/loginControllers')
 const validateUserFields = require('../MIDDLEWARES/user_formValidation.middleware');
 const notFound = require('../MIDDLEWARES/user_NotFound.middleware');
@@ -20,6 +21,10 @@ router
 .put(notFound,authenticateUser,checkAuth,validateUserFields,usersController.updateUser)
 .delete(notFound,authenticateUser,checkAuth,usersController.deleteUser);
 
+
+router
+.route('/profile/:id/poems')
+.get(poemController.perUser);
 
 // session route for login, register and logout
 router
