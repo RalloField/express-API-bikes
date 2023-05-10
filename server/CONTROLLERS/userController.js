@@ -97,7 +97,7 @@ deleteUser: async (req, res) =>
     {
         connection =  await pool.getConnection();
         let userID = req.params.id;
-        const data = await connection.execute('DELETE FROM webshop.users WHERE id = ?', [userID]);
+        const data = await connection.prepare('DELETE FROM webshop.users WHERE id = ?', [userID]);
         const result = await data.execute(userID);
         if (!result.affectedRows) {
             res.status(404).send('User not found');

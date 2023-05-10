@@ -10,7 +10,7 @@ const authenticateUser = require('../MIDDLEWARES/authentication_validation.middl
 // show all users -> only for admins?
 router
 .route('/users')
-.get(usersController.getUsers)
+.get(authenticateUser,usersController.getUsers)
 
 //show, update, create and delete -> add middleware so it only becomes available after logging in.
 router
