@@ -5,6 +5,7 @@ const controllers = require('../CONTROLLERS/poemControllers');
 const validatePoemFields = require('../MIDDLEWARES/poem_formValidation.middleware');
 const notFound = require('../MIDDLEWARES/poem_NotFound.middleware');
 const authenticateUser = require('../MIDDLEWARES/authentication_validation.middleware');
+const checkAuth = require('../MIDDLEWARES/authorization_validation.middleware');
 
 
 //landing page
@@ -22,8 +23,8 @@ router
 router
 .route('/poems/:id')
 .get(notFound, controllers.getPoem)
-.put(authenticateUser,notFound,validatePoemFields,controllers.updatePoem)
-.delete(authenticateUser,notFound, controllers.deletePoem);
+.put(notFound,authenticateUser,checkAuth,validatePoemFields,controllers.updatePoem)
+.delete(notFound,authenticateUser,checkAuth, controllers.deletePoem);
 
 
 

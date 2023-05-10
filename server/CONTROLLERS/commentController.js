@@ -43,16 +43,16 @@ getComment: async (req,res) => {
 
 createComment: async (req,res) => {
   
-  const {subject, comment_text} = req.body;
+  const {subject, comment_text, user_id, poem_id} = req.body;
 
   let connection;
 
   try
   {
     connection = await pool.getConnection();
-    const result = await connection.execute(`INSERT INTO comments (subject, comment_text) VALUES (?,?)`, [subject, comment_text]);
+    const result = await connection.execute(`INSERT INTO comments (subject, comment_text, user_id, poem_id) VALUES (?,?,?,?)`, [subject, comment_text,user_id,poem_id]);
     const commentID = result.insertId;
-    res.send({id:Number(commentID), subject,comment_text});
+    res.send({id:Number(commentID), subject,comment_text, user_id, poem_id});
   } catch (err) {
     console.error('Failed to create comment', err);
     res.status(500).send('Failed to create comment');
@@ -66,7 +66,7 @@ createComment: async (req,res) => {
 updateComment: async (req,res) => 
 {
   
-  const { subject, comment_text } = req.body;
+  const { subject, comment_text, user_id, poem_id } = req.body;
   const { id } = req.params;
 
   console.log(`Updating comment ${id} with name ${subject} `);
@@ -75,11 +75,13 @@ updateComment: async (req,res) =>
   try
   {
     connection = await pool.getConnection();
-    await connection.execute(`UPDATE webshop.comments SET subject=?, comment_text=? WHERE id=?`, [subject, comment_text, id]);
+    await connection.execute(`UPDATE webshop.comments SET subject=?, comment_text=?, user_id=?, poem_id=? WHERE id=?`, [subject, comment_text, user_id, poem_id, id]);
     const updatedComment = {
       id: Number(id),
       subject,
-      comment_text
+      comment_text,
+      user_id,
+      poem_id
     };
     res.send(updatedComment);
 

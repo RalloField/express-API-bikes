@@ -6,6 +6,7 @@ const validateUserFields = require('../MIDDLEWARES/user_formValidation.middlewar
 const notFound = require('../MIDDLEWARES/user_NotFound.middleware');
 const logoutController = require('../CONTROLLERS/logoutController');
 const authenticateUser = require('../MIDDLEWARES/authentication_validation.middleware');
+const checkAuth = require('../MIDDLEWARES/authorization_validation.middleware');
 
 // show all users -> only for admins?
 router
@@ -15,9 +16,9 @@ router
 //show, update, create and delete -> add middleware so it only becomes available after logging in.
 router
 .route('/profile/:id')
-.get(notFound,usersController.getUser)
-.put(authenticateUser,validateUserFields,usersController.updateUser)
-.delete(authenticateUser,usersController.deleteUser);
+.get(notFound,authenticateUser,checkAuth,usersController.getUser)
+.put(notFound,authenticateUser,checkAuth,validateUserFields,usersController.updateUser)
+.delete(notFound,authenticateUser,checkAuth,usersController.deleteUser);
 
 
 // session route for login, register and logout
