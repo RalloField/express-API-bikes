@@ -15,7 +15,7 @@ console.log('DecodedToken', decodedToken);
 const userId = decodedToken.id;
 console.log(userId);
 
-if (userId != req.params.id) {
+if (userId != req.user.id) {
     return res.status(401).send('Not authorized to see this page');
 }
 next();

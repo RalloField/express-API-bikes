@@ -22,7 +22,7 @@ router
 //show, update, delete single poem
 router
 .route('/poems/:id')
-.get(notFound, controllers.getPoem)
+.get(notFound,authenticateUser,checkAuth,controllers.getPoem)
 .put(notFound,authenticateUser,checkAuth,validatePoemFields,controllers.updatePoem)
 .delete(notFound,authenticateUser,checkAuth, controllers.deletePoem);
 
