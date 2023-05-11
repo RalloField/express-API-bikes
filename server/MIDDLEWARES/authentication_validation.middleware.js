@@ -15,7 +15,7 @@ const authenticateUser = (req,res, next) => {
     try {
         // Verify the access token
         const decoded = jwt.verify(accessToken, process.env.JWT_ACCESS_TOKEN);
-        req.user = decoded; // Attach the decoded user data to the request object
+        req.user.id = decoded; // Attach the decoded user data to the request object
         next(); // proceed to the next middleware or route handler
     } catch (err) {
         // If access token verification fails, user is not authenticated
