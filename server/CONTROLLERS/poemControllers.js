@@ -64,15 +64,16 @@ getPoem: async (req,res) => {
 createPoem: async (req,res) => {
   
   const {poem_name, poem_text, author, language } = req.body;
+  const user_id = req.user.id;
 
   let connection;
 
   try
   {
     connection = await pool.getConnection();
-    const result = await connection.execute(`INSERT INTO poems (poem_name, poem_text, author, language) VALUES (?,?,?,?)`, [poem_name, poem_text, author, language]);
+    const result = await connection.execute(`INSERT INTO poems (poem_name, poem_text, author, language, user_id) VALUES (?,?,?,?,?)`, [poem_name, poem_text, author, language, user_id]);
     const poemID = result.insertId;
-    res.send({id:Number(poemID), poem_name,poem_text,author,language});
+    res.send({id:Number(poemID), poem_name,poem_text,author,language, user_id});
   } catch (err) {
     console.error('Failed to create poem');
   } finally {

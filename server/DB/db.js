@@ -21,20 +21,20 @@ pool.getConnection()
     console.error('Error connecting to database', err);
   });
 
-pool.getConnection() 
-.then((conn) => {
-const sql = "SELECT poems.poem_name AS poems, users.user_name AS users FROM poems JOIN users ON poems.user_id = users.id";
-conn.query(sql)
-  .then((rows) => {
-    console.log(rows);
-  })
-  .catch((err) => {
-    console.error('Error executing query', err);
-  })
-  .finally(()=>{
-    conn.release();
-  });
-})
+// pool.getConnection() 
+// .then((conn) => {
+// const sql = "SELECT poems.poem_name AS poems, users.user_name AS users FROM poems JOIN users ON poems.user_id = users.id";
+// conn.query(sql)
+//   .then((rows) => {
+//     console.log(rows);
+//   })
+//   .catch((err) => {
+//     console.error('Error executing query', err);
+//   })
+//   .finally(()=>{
+//     conn.release();
+//   });
+// })
 
 
 

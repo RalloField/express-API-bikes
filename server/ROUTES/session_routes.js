@@ -9,21 +9,18 @@ const logoutController = require('../CONTROLLERS/logoutController');
 const authenticateUser = require('../MIDDLEWARES/authentication_validation.middleware');
 const checkAuth = require('../MIDDLEWARES/authorization_validation.middleware');
 
-// show all users -> only for admins?
-router
-.route('/users')
-.get(authenticateUser,usersController.getUsers)
 
-//show, update, create and delete -> add middleware so it only becomes available after logging in.
+// session route for login, register and logout
 router
-.route('/profile/:id')
-.get(notFound,authenticateUser,checkAuth,usersController.getUser)
-.put(notFound,authenticateUser,checkAuth,validateUserFields,usersController.updateUser)
-.delete(notFound,authenticateUser,checkAuth,usersController.deleteUser);
-
+.route('/session/login')
+.post(loginController.loginAuthenticator);
 
 router
-.route('/profile/:id/poems')
-.get(notFound,authenticateUser,checkAuth,poemController.perUser);
+.route('/session/register')
+.post(validateUserFields, usersController.createUser);
+
+router
+.route('/session/logout')
+.post(authenticateUser,logoutController.logoutAuthenticator);
 
 module.exports = router;
