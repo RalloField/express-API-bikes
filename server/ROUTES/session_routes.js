@@ -7,7 +7,6 @@ const validateUserFields = require('../MIDDLEWARES/user_formValidation.middlewar
 const notFound = require('../MIDDLEWARES/user_NotFound.middleware');
 const logoutController = require('../CONTROLLERS/logoutController');
 const authenticateUser = require('../MIDDLEWARES/authentication_validation.middleware');
-const checkAuth = require('../MIDDLEWARES/authorization_validation.middleware');
 
 
 // session route for login, register and logout

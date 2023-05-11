@@ -5,7 +5,7 @@ const controllers = require('../CONTROLLERS/poemControllers');
 const validatePoemFields = require('../MIDDLEWARES/poem_formValidation.middleware');
 const notFound = require('../MIDDLEWARES/poem_NotFound.middleware');
 const authenticateUser = require('../MIDDLEWARES/authentication_validation.middleware');
-const checkAuth = require('../MIDDLEWARES/authorization_validation.middleware');
+const checkAuth = require('../MIDDLEWARES/poem_authorization_validation.middleware');
 
 
 //landing page

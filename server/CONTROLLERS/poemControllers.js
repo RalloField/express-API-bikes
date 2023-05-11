@@ -21,26 +21,6 @@ getPoems: async (req,res) => {
     }   
 },
 
-//get poems per user
-
-perUser: async (req,res) => {
-  let connection;
-  try {
-    connection = await pool.getConnection();
-    let userId = req.params.id;
-    const data = await connection.query(`SELECT poems.poem_name AS poems_title FROM webshop.poems JOIN webshop.users ON poems.user_id = users.id WHERE users.id = ?`, [userId]);
-    console.log(data);
-    res.send(data);
-  } catch(err) {
-    console.log('Failed to get poems from database');
-        res.status(500).send('Failed to get poems from database');
-        throw err;
-    } finally {
-        if (connection) connection.release();
-    }
-  },
-
-
 //modal for getting detailed view
 
 getPoem: async (req,res) => {

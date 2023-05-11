@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const usersController = require('../CONTROLLERS/userController');
-const poemController = require('../CONTROLLERS/poemControllers');
-const loginController = require('../CONTROLLERS/loginControllers')
+const poemController = require('../CONTROLLERS/relationsController');
+const relationsController = require('../CONTROLLERS/relationsController');
 const validateUserFields = require('../MIDDLEWARES/user_formValidation.middleware');
 const notFound = require('../MIDDLEWARES/user_NotFound.middleware');
-const logoutController = require('../CONTROLLERS/logoutController');
 const authenticateUser = require('../MIDDLEWARES/authentication_validation.middleware');
-const checkAuth = require('../MIDDLEWARES/authorization_validation.middleware');
+const checkAuth = require('../MIDDLEWARES/user_authorization.middleware');
 
 // show all users -> only for admins?
 router
@@ -24,6 +23,11 @@ router
 
 router
 .route('/profile/:id/poems')
-.get(notFound,authenticateUser,checkAuth,poemController.perUser);
+.get(notFound,authenticateUser,checkAuth,poemController.poemperUser);
+
+
+router
+.route('/profile/:id/comments')
+.get(notFound,authenticateUser,checkAuth,relationsController.commentperUser);
 
 module.exports = router;
