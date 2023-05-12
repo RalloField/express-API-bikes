@@ -43,7 +43,9 @@ getComment: async (req,res) => {
 
 createComment: async (req,res) => {
   
-  const {subject, comment_text, user_id, poem_id} = req.body;
+  const {subject, comment_text} = req.body;
+  const user_id = req.user.id;
+  const poem_id = req.params.id;
 
   let connection;
 

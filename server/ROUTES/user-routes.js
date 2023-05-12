@@ -13,19 +13,20 @@ router
 .route('/users')
 .get(authenticateUser,usersController.getUsers)
 
-//show, update, create and delete -> add middleware so it only becomes available after logging in.
+//show, update, create and delete -> only after authentication and authorization -> copy to admin folder with admin middlewares
 router
 .route('/profile/:id')
 .get(notFound,authenticateUser,checkAuth,usersController.getUser)
 .put(notFound,authenticateUser,checkAuth,validateUserFields,usersController.updateUser)
 .delete(notFound,authenticateUser,checkAuth,usersController.deleteUser);
 
+// get posted poems per user ->> in general no authentication needed?
 
 router
 .route('/profile/:id/poems')
 .get(notFound,authenticateUser,checkAuth,poemController.poemperUser);
 
-
+// get comments per user ->> in general no authentication needed?
 router
 .route('/profile/:id/comments')
 .get(notFound,authenticateUser,checkAuth,relationsController.commentperUser);

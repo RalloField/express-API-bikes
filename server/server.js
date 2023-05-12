@@ -5,8 +5,9 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const poem_Server = require('./ROUTES/poem_routes');
 const user_Server = require('./ROUTES/user-routes');
-const session_Server = require('./ROUTES/session_routes');
+const session_Server = require('./ROUTES/sessions/session_routes');
 const comment_Server = require('./ROUTES/comment_routes');
+const admin_Server = require('./ROUTES/admin/admin_routes');
 const pageNotFound = require('./MIDDLEWARES/pageNotFound.middleware');
 
 
@@ -23,6 +24,7 @@ app.use(poem_Server);
 app.use(user_Server);
 app.use(comment_Server);
 app.use(session_Server);
+app.use(admin_Server);
 app.use(pageNotFound);
 
 
