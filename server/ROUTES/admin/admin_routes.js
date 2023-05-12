@@ -6,7 +6,7 @@ const poemController = require('../../CONTROLLERS/poemControllers');
 const validateAdminFields = require('../../MIDDLEWARES/admin_formValidation.middleware');
 const notFound = require('../../MIDDLEWARES/admin_NotFound.middleware');
 const authenticateAdmin = require('../../MIDDLEWARES/admin_authentication.middleware');
-const checkAuth = require('../../MIDDLEWARES/admin_authorization.middleware');
+const adminAuth = require('../../MIDDLEWARES/admin_authorization.middleware');
 
 
 // show all users -> only for admins?
@@ -18,14 +18,14 @@ router
 // show all users -> only for admins?
 router
 .route('/admins')
-.get(notFound,adminController.getAdmins)
-.post(validateAdminFields,adminController.createAdmin);
+.get(authenticateAdmin,adminController.getAdmins)
+.post(authenticateAdmin,validateAdminFields,adminController.createAdmin);
 
 router
 .route('/admins/:id')
-.get(notFound,adminController.getAdmin)
-.put(notFound,validateAdminFields,adminController.updateAdmin)
-.delete(notFound,adminController.deleteAdmin);
+.get(notFound,authenticateAdmin,adminAuth,adminController.getAdmin)
+.put(notFound,authenticateAdmin,adminAuth,validateAdminFields,adminController.updateAdmin)
+.delete(notFound,authenticateAdmin,adminAuth,adminController.deleteAdmin);
 
 
 
