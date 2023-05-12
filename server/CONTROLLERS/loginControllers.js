@@ -31,7 +31,7 @@ const loginController = {
 
             } else { 
 
-            const accessToken = jwt.sign({id:user.id, email:user.email}, process.env.JWT_ACCESS_TOKEN);
+            const accessToken = jwt.sign({id:user.id, email:user.email, is_admin:user.is_admin}, process.env.JWT_ACCESS_TOKEN);
 
             res.cookie('webshop.process',accessToken,{
                 httpOnly: true,

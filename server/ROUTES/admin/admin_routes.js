@@ -1,11 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../../CONTROLLERS/adminController');
-const poemController = require('../../CONTROLLERS/relationsController');
+const userController = require('../../CONTROLLERS/userController');
+const poemController = require('../../CONTROLLERS/poemControllers');
 const validateAdminFields = require('../../MIDDLEWARES/admin_formValidation.middleware');
 const notFound = require('../../MIDDLEWARES/admin_NotFound.middleware');
-const authenticateUser = require('../../MIDDLEWARES/authentication_validation.middleware');
-const checkAuth = require('../../MIDDLEWARES/user_authorization.middleware');
+const authenticateAdmin = require('../../MIDDLEWARES/admin_authentication.middleware');
+const checkAuth = require('../../MIDDLEWARES/admin_authorization.middleware');
+
+
+// show all users -> only for admins?
+router
+.route('/users')
+.get(authenticateAdmin,userController.getUsers)
+
 
 // show all users -> only for admins?
 router

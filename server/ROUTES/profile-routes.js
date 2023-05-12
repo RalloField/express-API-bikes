@@ -8,10 +8,6 @@ const notFound = require('../MIDDLEWARES/user_NotFound.middleware');
 const authenticateUser = require('../MIDDLEWARES/authentication_validation.middleware');
 const checkAuth = require('../MIDDLEWARES/user_authorization.middleware');
 
-// show all users -> only for admins?
-router
-.route('/users')
-.get(authenticateUser,usersController.getUsers)
 
 //show, update, create and delete -> only after authentication and authorization -> copy to admin folder with admin middlewares
 router
