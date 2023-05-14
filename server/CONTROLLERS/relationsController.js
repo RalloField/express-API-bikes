@@ -12,7 +12,7 @@ poemperUser: async (req,res) => {
   try {
     connection = await pool.getConnection();
     let userId = req.params.id;
-    const data = await connection.query(`SELECT poems.poem_name AS poems_title FROM webshop.poems JOIN webshop.users ON poems.user_id = users.id WHERE users.id = ?`, [userId]);
+    const data = await connection.query(`SELECT poems.poem_name AS poems_title, poems.poem_text AS text, author AS poem_author, language AS poem_language FROM webshop.poems JOIN webshop.users ON poems.user_id = users.id WHERE users.id = ?`, [userId]);
     console.log(data);
     res.send(data);
   } catch(err) {
@@ -29,7 +29,7 @@ poemperUser: async (req,res) => {
     try {
         connection = await pool.getConnection();
         let userId = req.params.id;
-        const data = await connection.query(`SELECT comments.subject AS comment_title FROM webshop.comments JOIN webshop.users ON comments.user_id = users.id WHERE users.id = ?`, [userId]);
+        const data = await connection.query(`SELECT comments.subject AS comment_title, comments.comment_text AS text FROM webshop.comments JOIN webshop.users ON comments.user_id = users.id WHERE users.id = ?`, [userId]);
         console.log(data);
         res.send(data);
     } catch(err) {
@@ -46,7 +46,7 @@ poemperUser: async (req,res) => {
     try{
       connection = await pool.getConnection();
       let poemsId = req.params.id;
-      const data = await connection.query(`SELECT comments.subject AS comment_title FROM webshop.comments JOIN webshop.poems ON comments.poem_id = poems.id WHERE poems.id = ?`,[poemsId]);
+      const data = await connection.query(`SELECT comments.subject AS comment_title, comments.comment_text AS text FROM webshop.comments JOIN webshop.poems ON comments.poem_id = poems.id WHERE poems.id = ?`,[poemsId]);
       console.log(data);
       res.send(data);
     } catch(err) {
