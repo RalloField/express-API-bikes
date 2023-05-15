@@ -52,7 +52,7 @@ createComment: async (req,res) => {
   try
   {
     connection = await pool.getConnection();
-    const result = await connection.execute(`INSERT INTO comments (subject, comment_text, user_id, poem_id) VALUES (?,?,?,?)`, [subject, comment_text,user_id,poem_id]);
+    const result = await connection.execute(`INSERT INTO comments (subject, comment_text, user_id, bike_id) VALUES (?,?,?,?)`, [subject, comment_text,user_id,poem_id]);
     const commentID = result.insertId;
     res.send({id:Number(commentID), subject,comment_text, user_id, poem_id});
   } catch (err) {
@@ -68,7 +68,7 @@ createComment: async (req,res) => {
 updateComment: async (req,res) => 
 {
   
-  const { subject, comment_text, user_id, poem_id } = req.body;
+  const { subject, comment_text, user_id, bike_id } = req.body;
   const { id } = req.params;
 
   console.log(`Updating comment ${id} with name ${subject} `);
@@ -77,13 +77,13 @@ updateComment: async (req,res) =>
   try
   {
     connection = await pool.getConnection();
-    await connection.execute(`UPDATE webshop.comments SET subject=?, comment_text=?, user_id=?, poem_id=? WHERE id=?`, [subject, comment_text, user_id, poem_id, id]);
+    await connection.execute(`UPDATE webshop.comments SET subject=?, comment_text=?, user_id=?, poem_id=? WHERE id=?`, [subject, comment_text, user_id, bike_id, id]);
     const updatedComment = {
       id: Number(id),
       subject,
       comment_text,
       user_id,
-      poem_id
+      bike_id
     };
     res.send(updatedComment);
 
@@ -105,7 +105,7 @@ deleteComment: async (req,res) =>
   {
     connection = await pool.getConnection();
     let commentID = req.params.id;
-    const data = await connection.prepare('DELETE FROM webshop.poems WHERE id=?', [commentID]);
+    const data = await connection.prepare('DELETE FROM webshop.comments WHERE id=?', [commentID]);
     const result = await data.execute(commentID);
     res.send("comment deleted successfully");
   } catch (err) {

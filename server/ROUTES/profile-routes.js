@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const usersController = require('../CONTROLLERS/userController');
-const poemController = require('../CONTROLLERS/relationsController');
+const bikeController = require('../CONTROLLERS/relationsController');
 const relationsController = require('../CONTROLLERS/relationsController');
 const validateUserFields = require('../MIDDLEWARES/user_formValidation.middleware');
 const notFound = require('../MIDDLEWARES/user_NotFound.middleware');
@@ -19,8 +19,8 @@ router
 // get posted poems per user ->> in general no authentication needed?
 
 router
-.route('/profile/:id/poems')
-.get(notFound,authenticateUser,checkAuth,poemController.poemperUser);
+.route('/profile/:id/bikes')
+.get(notFound,authenticateUser,checkAuth,bikeController.bikeperUser);
 
 // get comments per user ->> in general no authentication needed?
 router

@@ -6,13 +6,13 @@ dotenv.config();
 // get all the data from the database table (webshop.products)
 // setup basic CRUD functionality
 
-const poemController = {
+const bikeController = {
 
-getPoems: async (req,res) => {
+getBikes: async (req,res) => {
     let connection;
     try {
         connection = await pool.getConnection();
-        const data = await connection.query(`SELECT * FROM webshop.poems`);
+        const data = await connection.query(`SELECT * FROM webshop.bikes`);
         res.send(data);
     } catch(err) {
         throw err;
@@ -23,16 +23,16 @@ getPoems: async (req,res) => {
 
 //modal for getting detailed view
 
-getPoem: async (req,res) => {
+getBike: async (req,res) => {
   let connection;
   try{
     connection = await pool.getConnection();
     let poemID = req.params.id;
-    const data = await connection.query(`SELECT * FROM webshop.poems WHERE id=?`, [poemID]);
+    const data = await connection.query(`SELECT * FROM webshop.bikes WHERE id=?`, [poemID]);
       res.send(data);
   } catch(err) {
-        console.log('Failed to get poems from database');
-        res.status(500).send('Failed to get poems from database');
+        console.log('Failed to get bikes from database');
+        res.status(500).send('Failed to get bikes from database');
         throw err;
     } finally {
         if (connection) connection.release();
@@ -41,9 +41,9 @@ getPoem: async (req,res) => {
 
 //modal for creating a new record in the database
 
-createPoem: async (req,res) => {
+createBike: async (req,res) => {
   
-  const {poem_name, poem_text, author, language } = req.body;
+  const {brand, model, type, price } = req.body;
   const user_id = req.user.id;
 
   let connection;
@@ -51,11 +51,11 @@ createPoem: async (req,res) => {
   try
   {
     connection = await pool.getConnection();
-    const result = await connection.execute(`INSERT INTO poems (poem_name, poem_text, author, language, user_id) VALUES (?,?,?,?,?)`, [poem_name, poem_text, author, language, user_id]);
+    const result = await connection.execute(`INSERT INTO bikes (brand, model, type, price, user_id) VALUES (?,?,?,?,?)`, [brand, model, type, price, user_id]);
     const poemID = result.insertId;
-    res.send({id:Number(poemID), poem_name,poem_text,author,language, user_id});
+    res.send({id:Number(poemID), brand,model,type,price, user_id});
   } catch (err) {
-    console.error('Failed to create poem');
+    console.error('Failed to create bike');
   } finally {
     if (connection) await connection.release();
   }
@@ -63,30 +63,30 @@ createPoem: async (req,res) => {
 
 //modal for putting and update to a record
 
-updatePoem: async (req,res) => 
+updateBike: async (req,res) => 
 {
   
-  const { poem_name, poem_text, author, language } = req.body;
+  const { brand, model, type, price } = req.body;
   const { id } = req.params;
 
-  console.log(`Updating idea ${id} with name ${poem_name} and ${author}`);
+  console.log(`Updating idea ${id} with name ${brand} and ${model}`);
   let connection;
 
   try
   {
     connection = await pool.getConnection();
-    await connection.execute(`UPDATE webshop.poems SET poem_name=?, poem_text=?, author=?, language=? WHERE id=?`, [poem_name, poem_text, author, language, id]);
+    await connection.execute(`UPDATE webshop.bikes SET brand=?, model=?, type=?, price=? WHERE id=?`, [brand, model, type, price, id]);
     const updatedPoem = {
       id: Number(id),
-      poem_name,
-      poem_text,
-      author,
-      language,
+      brand,
+      model,
+      type,
+      price,
     };
     res.send(updatedPoem);
 
   } catch (err) {
-    console.error('Failed to update Poem:', err);
+    console.error('Failed to update Bike:', err);
     throw err;
   } finally {
     if (connection) await connection.release();
@@ -95,16 +95,16 @@ updatePoem: async (req,res) =>
 
 //modal for deleting a record from the database
 
-deletePoem: async (req,res) => 
+deleteBike: async (req,res) => 
 {
   let connection;
 
   try 
   {
     connection = await pool.getConnection();
-    let poemID = req.params.id;
-    const data = await connection.prepare('DELETE FROM webshop.poems WHERE id=?', [poemID]);
-    const result = await data.execute(poemID);
+    let bikeID = req.params.id;
+    const data = await connection.prepare('DELETE FROM webshop.bikes WHERE id=?', [bikeID]);
+    const result = await data.execute(bikeID);
     res.send("record deleted successfully");
   } catch (err) {
     throw err;
@@ -114,4 +114,4 @@ deletePoem: async (req,res) =>
 }
 }
 
-module.exports = poemController;
+module.exports = bikeController;

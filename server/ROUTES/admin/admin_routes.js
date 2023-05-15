@@ -3,13 +3,13 @@ const router = express.Router();
 const adminController = require('../../CONTROLLERS/adminController');
 const userController = require('../../CONTROLLERS/userController');
 const commentController = require('../../CONTROLLERS/commentController');
-const poemController = require('../../CONTROLLERS/poemControllers');
-const validatePoemFields = require('../../MIDDLEWARES/poem_formValidation.middleware');
+const bikeController = require('../../CONTROLLERS/bikesControllers');
+const validateBikeFields = require('../../MIDDLEWARES/bike_formValidation.middleware');
 const validateUserFields = require('../../MIDDLEWARES/user_formValidation.middleware');
 const validateCommentFields = require('../../MIDDLEWARES/comment_formValidation.middleware');
 const commentNotFound = require('../../MIDDLEWARES/comment_NotFound.middleware');
 const userNotFound = require('../../MIDDLEWARES/user_NotFound.middleware');
-const poemNotFound = require('../../MIDDLEWARES/poem_NotFound.middleware');
+const bikeNotFound = require('../../MIDDLEWARES/bike_NotFound.middleware');
 const validateAdminFields = require('../../MIDDLEWARES/admin_formValidation.middleware');
 const adminNotFound = require('../../MIDDLEWARES/admin_NotFound.middleware');
 const authenticateAdmin = require('../../MIDDLEWARES/admin_authentication.middleware');
@@ -53,15 +53,15 @@ router
 //admin routes to manage the poems
 
 router
-.route('/admins/poems')
-.get(authenticateAdmin,poemController.getPoems)
-.post(authenticateAdmin,validatePoemFields,poemController.createPoem);
+.route('/admins/bikes')
+.get(authenticateAdmin,bikeController.getBikes)
+.post(authenticateAdmin,validateBikeFields,bikeController.createBike);
 
 router
-.route('/admins/poems/:id')
-.get(authenticateAdmin,poemNotFound,poemController.getPoem)
-.put(authenticateAdmin,poemNotFound,validatePoemFields,poemController.updatePoem)
-.delete(authenticateAdmin,poemNotFound,poemController.deletePoem);
+.route('/admins/bikes/:id')
+.get(authenticateAdmin,bikeNotFound,bikeController.getBike)
+.put(authenticateAdmin,bikeNotFound,validateBikeFields,bikeController.updateBike)
+.delete(authenticateAdmin,bikeNotFound,bikeController.deleteBike);
 
 //admin routes to manage the comments
 

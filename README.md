@@ -1,4 +1,4 @@
-# Welcome to my the Poetry_API
+# Welcome to my the Cyclist_API
 
 ## Table of Contents
 * [Introduction](#introduction)
@@ -13,7 +13,7 @@
 
 
 ## Introduction
-- This is a basic build for an API with Poems to set up a website in which they can be used for cultural purposes.
+- This is a basic build for an API with Bikes to set up a website in which they can be used for cycling purposes.
 
 ## Prerequisites
 - An IDE like VS code to open the files and read the code.

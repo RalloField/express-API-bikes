@@ -16,14 +16,14 @@ console.log('Token:', token);
 const decodedToken = jwt.verify(token,jwt_token);
 console.log('DecodedToken', decodedToken);
 
-let poemId = req.params.id;
+let bikeID = req.params.id;
 let userId = req.user.id;
 
 connection = await pool.getConnection();
-let result = await connection.query(`SELECT * FROM webshop.poems WHERE id=? AND user_id=?`,[poemId, userId]);
+let result = await connection.query(`SELECT * FROM webshop.bikes WHERE id=? AND user_id=?`,[bikeID, userId]);
 
 if (!result.length) {
-    return res.status(401).send('Not Authorized to modify this poem');
+    return res.status(401).send('Not Authorized to modify this bike');
 }
 next();
 } catch (error) {

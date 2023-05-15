@@ -7,14 +7,14 @@ const notFound = async (req, res, next) => {
   let connection;
   try {
     connection = await pool.getConnection();
-    const data = await connection.query(`SELECT * FROM webshop.poems WHERE id=?`, [id]);
+    const data = await connection.query(`SELECT * FROM webshop.bikes WHERE id=?`, [id]);
     if (!data.length) {
-      return res.status(404).send('Poem not found');
+      return res.status(404).send('Bike not found');
     }
     next();
   } catch (err) {
-    console.log('Failed to check if poem exists');
-    res.status(500).send('Failed to check if poem exists');
+    console.log('Failed to check if bike exists');
+    res.status(500).send('Failed to check if bike exists');
     throw err;
   } finally {
     if (connection) connection.release();

@@ -1,40 +1,40 @@
 //modules
 const express = require('express');
 const router = express.Router();
-const controllers = require('../CONTROLLERS/poemControllers');
+const bikeControllers = require('../CONTROLLERS/bikesControllers');
 const relationsController = require('../CONTROLLERS/relationsController')
-const validatePoemFields = require('../MIDDLEWARES/poem_formValidation.middleware');
-const notFound = require('../MIDDLEWARES/poem_NotFound.middleware');
+const validateBikeFields = require('../MIDDLEWARES/bike_formValidation.middleware');
+const notFound = require('../MIDDLEWARES/bike_NotFound.middleware');
 const authenticateUser = require('../MIDDLEWARES/authentication_validation.middleware');
-const checkAuth = require('../MIDDLEWARES/poem_authorization_validation.middleware');
+const checkAuth = require('../MIDDLEWARES/bike_authorization_validation.middleware');
 const validateCommentFields = require('../MIDDLEWARES/comment_formValidation.middleware');
 const commentController = require('../CONTROLLERS/commentController');
 
 
 //landing page
 router.route('/').get((req,res)=>{
-    res.send('Hello, fellow poetry lovers. Add a /poems after the URL to start reading, and if your name is Poe watch out for the trees.');
+    res.send('Hello, fellow cyclists lovers. Add a /bikes after the URL to start cycling.');
 });
 
 //routes for all poems and create poem
 router
-.route('/poems')
-.get(controllers.getPoems)
-.post(authenticateUser,validatePoemFields, controllers.createPoem);
+.route('/bikes')
+.get(bikeControllers.getBikes)
+.post(authenticateUser,validateBikeFields, bikeControllers.createBike);
 
 //show, update, delete single poem -> needs authentication and authorization
 
 router
-.route('/poems/:id')
-.get(notFound,controllers.getPoem)
-.put(notFound,authenticateUser,checkAuth,validatePoemFields,controllers.updatePoem)
-.delete(notFound,authenticateUser,checkAuth, controllers.deletePoem);
+.route('/bikes/:id')
+.get(notFound,bikeControllers.getBike)
+.put(notFound,authenticateUser,checkAuth,validateBikeFields,bikeControllers.updateBike)
+.delete(notFound,authenticateUser,checkAuth, bikeControllers.deleteBike);
 
 
 //getting comments per poem and posting a comment on the poem
 router
-.route('/poems/:id/comments')
-.get(relationsController.commentsperPoem)
+.route('/bikes/:id/comments')
+.get(relationsController.commentsperBike)
 .post(authenticateUser,validateCommentFields,commentController.createComment);
 
 
