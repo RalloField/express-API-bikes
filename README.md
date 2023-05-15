@@ -79,7 +79,7 @@ The structure should be as follows:
 | user_name | VARCHAR | latin1 | no | No default |
 | user_lastname | VARCHAR | latin1 | no | No default |
 | email | VARCHAR | latin1 | no | No default |
-| password | TEXT | | latin1 | No default |
+| password | TEXT | latin1 | latin1 | No default |
 | is_admin | TINYINT | null | no | 0 |
 
 **Bikes**
@@ -89,7 +89,7 @@ The structure should be as follows:
 | brand | VARCHAR | latin1 | no | No default |
 | model | VARCHAR | latin1 | no | No default |
 | type | VARCHAR | latin1 | no | No default |
-| price | int | | null | No |
+| price | int | null | null | No |
 | user_id | int | null | no | 0 |
 
 **Comments**
